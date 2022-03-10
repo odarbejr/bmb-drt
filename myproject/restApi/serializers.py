@@ -8,6 +8,8 @@ from .models import demographic_information
 from .models import uses
 from .models import Layers_attribute
 from .models import cities
+from .models import region
+from .models import Type_of_animals
 
 class caveinventorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -68,4 +70,24 @@ class citiesSerializer(serializers.ModelSerializer):
         model = cities
         fields=[
             'name'  
+        ]
+
+class regionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = region
+        fields=[
+            'id',
+            'code',
+            'name' ,
+            'region_id' 
+        ]
+
+class Type_of_animalsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Type_of_animals
+        fields=[
+            'id',
+            'image',
+            'name' ,
+            'description' 
         ]

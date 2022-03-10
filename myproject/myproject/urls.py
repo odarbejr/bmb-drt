@@ -21,5 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('rest-api/',include('restApi.urls')),
     # path('login/',views.CustomAuthTokenLogin.as_view),
+
     url(r'restApi/',include('restApi.urls')),
+    # url(r'^$',views.homepage),
+    # url(r'^homepage/$',views.homepage),
 ]

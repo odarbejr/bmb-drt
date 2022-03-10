@@ -4,50 +4,58 @@ from django.db import models
 # Create your models here.
 
 REGION_SELECTION = [
-    ('Region I', 'Ilocos Region'),
-    ('Region II', 'Cagayan Valley'),
-    ('Region III', 'Central Luzon'),
-    ('Region IV', 'Calabarzon'),
-    ('Region', 'Mimaropa'),
-    ('Region V', 'Bicol Region'),
-    ('Region VI', 'Western Visayas'),
-    ('Region VII', 'Central Visayas'),
-    ('Region VIII', 'Eastern Visayas'),
-    ('Region IX', 'Zamboanga Peninsula'),
-    ('Region X', 'Northern Mindanao'),
-    ('Region XI', 'Davao Region'),
-    ('Region XII', 'SOCCSKSARGEN'),
-    ('Region XIII', 'Caraga'),
-    ('NCR', 'National Capital Region'),
-    ('CAR', 'Cordillera Administrative Region'),
-    ('BARMM', 'Bangsamoro Autonomous Region in Muslim Mindanao'),
-    ('NS', 'Zamboanga Peninsula'),
+    ('Ilocos', 'Ilocos'),
+    ('Cagayan Valley', 'Cagayan Valley'),
+    ('Central Luzon', 'Central Luzon'),
+    ('Calabarzon', 'Calabarzon'),
+    ('Mimaropa', 'Mimaropa'),
+    ('Bicol Region', 'Bicol Region'),
+    ('Western Visayas', 'Western Visayas'),
+    ('Central Visayas', 'Central Visayas'),
+    ('Eastern Visayas', 'Eastern Visayas'),
+    ('Zamboanga Peninsula', 'Zamboanga Peninsula'),
+    ('Northern Mindanao', 'Northern Mindanao'),
+    ('Davao', 'Davao'),
+    ('SOCCSKSARGEN', 'SOCCSKSARGEN'),
+    ('Caraga', 'Caraga'),
+    ('National Capital Region', 'National Capital Region'),
+    ('Cordillera Administrative Region', 'Cordillera Administrative Region'),
+    ('Bangsamoro Autonomous Region in Muslim Mindanao', 'Bangsamoro Autonomous Region in Muslim Mindanao'),
 ]
 CITIES_SELECTION = [
-    ('012801','Adams'),
-    ('012802','Bacarra'),
-    ('012803','Badoc'),
-    ('012804','Bangui'),
-    ('012805','City of Batac'),
-    ('012806','Burgos'),
-    ('012807','Carasi'),
-    ('012808','Currimao'),
-    ('012809','Dingras'),
-    ('012810','Dumalneg'),
-    ('012811','Banna'),
-    ('012812','City of Laoag (Capital)'),
-    ('012813','Marcos'),
-    ('012814','Nueva Era'),
-    ('012815','Pagudpud'),
-    ('012816','Paoay'),
-    ('012817','Pasuquin'),
-    ('012818','Piddig'),
-    ('012819','Pinili'),
-    ('012820','San Nicolas'),
-    ('012821','Sarrat'),
+    ('Adams','Adams'),
+    ('Bacarra','Bacarra'),
+    ('Badoc','Badoc'),
+    ('Bangui','Bangui'),
+    ('City of Bata','City of Batac'),
+    ('Burgos','Burgos'),
+    ('Carasi','Carasi'),
+    ('Currimao','Currimao'),
+    ('Dingras','Dingras'),
+    ('Dumalneg','Dumalneg'),
+    ('Banna','Banna'),
+    ('City of Laoag (Capital)','City of Laoag (Capital)'),
+    ('Marcos','Marcos'),
+    ('Nueva Era','Nueva Era'),
+    ('Pagudpud','Pagudpud'),
+    ('Paoay','Paoay'),
+    ('Pasuquin','Pasuquin'),
+    ('Piddig','Piddig'),
+    ('Pinili','Pinili'),
+    ('San Nicolas','San Nicolas'),
+    ('Sarrat','Sarrat'),
     
 ]
 
+
+class region(models.Model):
+    id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    code = models.CharField(max_length=9)
+    name = models.CharField(max_length=200)
+    region_id = models.CharField(max_length=5)
+ 
+def __str__(self):
+    return "%s"%(self.id)
 
 class cities(models.Model):
     code = models.CharField(max_length=9)
@@ -141,6 +149,23 @@ class uses(models.Model):
 def __str__(self):
     return self.type_of_activity
 
+class Type_of_animals(models.Model):
+    id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    name = models.CharField(max_length=150, null=True, blank=True)
+    image = models.TextField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+
+def __str__(self):
+    return "%s"%(self.id)
+
+ANIMALS_SELECTION = [
+    ('Troglobites','Troglobites'),
+    ('Troglophiles','Troglophiles'),
+    ('Accidentals ','Accidentals '),
+    ('Infrared eyesight ','Infrared eyesight '),
+    ('Giant centipedes ','Giant centipedes '),
+    ('elephantnose fish','elephantnose fish'),
+]
 
 SIZE_SELECTION = [
     ('L', 'Large'),
@@ -153,11 +178,11 @@ class Layers_attribute(models.Model):
     id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     layer_name = models.CharField(max_length=100, null=True, blank=True)
     description= models.CharField(max_length=100, null=True, blank=True)
-    region= models.CharField(max_length=80, null=True, blank=True)
+    region= models.CharField(max_length=80, null=True, blank=True, choices=REGION_SELECTION)
     barangay= models.CharField(max_length=100, null=True, blank=True)
     city= models.CharField(max_length=100, null=True, blank=True)
     total_of_cave= models.IntegerField(null=True, blank=True)
-    type_of_animal = models.CharField(max_length=100, null=True, blank=True)
+    type_of_animal = models.CharField(max_length=100, null=True, blank=True, choices=ANIMALS_SELECTION)
     total_of_male= models.IntegerField(null=True, blank=True)
     total_of_female= models.IntegerField(null=True, blank=True)
     overall_gender= models.IntegerField(null=True, blank=True)

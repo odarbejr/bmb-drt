@@ -17,6 +17,8 @@ from .serializers import demographic_informationSerializer
 from .serializers import usesSerializer
 from .serializers import Layers_attributeSerializer
 from .serializers import citiesSerializer
+from .serializers import regionSerializer
+from .serializers import Type_of_animalsSerializer
 
 from .models import caveinventory
 from .models import Period_accessment
@@ -27,6 +29,8 @@ from .models import demographic_information
 from .models import uses
 from .models import Layers_attribute
 from .models import cities
+from .models import region
+from .models import Type_of_animals
 
 
 
@@ -84,9 +88,17 @@ class Layers_attribute_viewset(viewsets.ModelViewSet):
 
 
 
+class region_viewset(viewsets.ModelViewSet):
+    queryset=region.objects.all()
+    serializer_class=regionSerializer
+
 class cities_viewset(viewsets.ModelViewSet):
     queryset=cities.objects.all()
     serializer_class=citiesSerializer
+
+class Type_of_animals_viewset(viewsets.ModelViewSet):
+    queryset=Type_of_animals.objects.all()
+    serializer_class=Type_of_animalsSerializer
 
 # def layers(request):
 #     layers=Layers_attribute.objects.all()
